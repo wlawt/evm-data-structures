@@ -63,12 +63,8 @@ contract BST {
             remove(bst[n].right, k);
         } else {
             // k == bst[n].key
-            if (bst[bst[n].left].key == 0) {
+            if (bst[bst[n].left].key == 0 || bst[bst[n].right].key == 0) {
                 // bytes32 tmp = bst[n].right;
-                delete bst[n];
-                return;
-            } else if (bst[bst[n].right].key == 0) {
-                // bytes32 tmp = bst[n].left;
                 delete bst[n];
                 return;
             }
