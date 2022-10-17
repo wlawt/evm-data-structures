@@ -19,18 +19,19 @@ contract Heap {
         fixUp(l);
     }
 
-    function deleteMax() external returns (uint256) {
+    function deleteMax() external {
+        if (size == 0) return;
+
         uint256 l = last();
-        uint256 r = root();
 
         // swap
-        uint256 tmp = arr[r];
-        arr[r] = arr[l];
+        uint256 tmp = arr[0];
+        arrExists[tmp] = false;
+        arr[0] = arr[l];
         arr[l] = tmp;
 
         size--;
-        fixDown(r);
-        return arr[l];
+        fixDown(0);
     }
 
     function findMax() external view returns (uint256) {
@@ -83,9 +84,9 @@ contract Heap {
 
     function fixDown(uint256 i) internal {
         while (exists(left(i)) && exists(right(i))) {
-            uint256 j = left(i);
-            if (exists(right(i)) && arr[right(i)] > arr[j]) {
-                j = right(i);
+            uint256 j = 2 * i + 1;
+            if (exists(right(i)) && right(i) > arr[j]) {
+                j = 2 * i + 2;
             }
 
             if (arr[i] >= arr[j]) break;
