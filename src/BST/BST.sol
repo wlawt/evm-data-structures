@@ -10,8 +10,6 @@ contract BST {
 
     mapping(bytes32 => Node) public bst;
 
-    // bytes32 public root = 0;
-
     constructor() {}
 
     function insert(bytes32 n, uint256 k) public returns (bytes32) {
@@ -64,7 +62,6 @@ contract BST {
         } else {
             // k == bst[n].key
             if (bst[bst[n].left].key == 0 || bst[bst[n].right].key == 0) {
-                // bytes32 tmp = bst[n].right;
                 delete bst[n];
                 return;
             }
