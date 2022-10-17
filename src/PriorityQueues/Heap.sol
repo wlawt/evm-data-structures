@@ -2,13 +2,12 @@
 pragma solidity ^0.8.13;
 
 contract Heap {
-    uint256 size;
+    uint256 public size = 0;
     uint256[] public arr;
     mapping(uint256 => bool) public arrExists;
 
     constructor(uint256 _size) {
-        size = _size;
-        arr = new uint256[](size);
+        arr = new uint256[](_size);
     }
 
     function insert(uint256 n) external {
@@ -42,16 +41,19 @@ contract Heap {
     }
 
     function last() internal view returns (uint256) {
-        return arr.length - 1;
+        return size - 1;
     }
 
     function parent(uint256 idx) internal view returns (uint256) {
+        if (idx == 0) {
+            return arr[0];
+        }
         uint256 parentIdx = (idx - 1) / 2;
         return arr[parentIdx];
     }
 
     function exists(uint256 n) internal view returns (bool) {
-        return arrExists[n];
+        return arrExists[n] ? true : false;
     }
 
     function left(uint256 idx) internal view returns (uint256) {
@@ -63,13 +65,14 @@ contract Heap {
     }
 
     function fixUp(uint256 idx) internal {
-        uint256 node = parent(idx);
-        while (exists(node) && arr[node] < arr[idx]) {
+        while (
+            exists(parent(idx)) && idx > 0 && arr[(idx - 1) / 2] < arr[idx]
+        ) {
             // swap
-            uint256 tmp = arr[node];
-            arr[node] = arr[idx];
-            arr[idx] = tmp;
-            idx = node;
+            uint256 tmp = arr[idx];
+            arr[idx] = arr[(idx - 1) / 2];
+            arr[(idx - 1) / 2] = tmp;
+            idx = (idx - 1) / 2;
         }
     }
 
