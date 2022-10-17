@@ -9,15 +9,20 @@ contract BST {
     }
 
     mapping(bytes32 => Node) public bst;
-    bytes32 public root;
+
+    // bytes32 public root = 0;
 
     constructor() {}
 
     function insert(bytes32 n, uint256 k) public returns (bytes32) {
         // tree is empty
         if (bst[n].key == 0) {
+            bst[0] = bst[n];
+            n = createAddress(k, 0);
             // make the node
             bst[n].key = k;
+            bst[n].left = 0;
+            bst[n].right = 0;
             return n;
         }
 
@@ -85,5 +90,13 @@ contract BST {
             addr = curr.left;
         }
         return addr;
+    }
+
+    function createAddress(uint256 key, bytes32 parentAddress)
+        public
+        view
+        returns (bytes32)
+    {
+        return keccak256(abi.encodePacked(key, parentAddress, block.timestamp));
     }
 }
