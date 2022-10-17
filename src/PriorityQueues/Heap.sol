@@ -48,8 +48,7 @@ contract Heap {
         if (idx == 0) {
             return arr[0];
         }
-        uint256 parentIdx = (idx - 1) / 2;
-        return arr[parentIdx];
+        return arr[(idx - 1) / 2];
     }
 
     function exists(uint256 n) internal view returns (bool) {
@@ -64,10 +63,15 @@ contract Heap {
         return arr[2 * idx + 2];
     }
 
+    function checkBounds(uint256 idx) internal view returns (bool) {
+        if (idx == 0) {
+            return arr[0] < arr[idx];
+        }
+        return arr[(idx - 1) / 2] < arr[idx];
+    }
+
     function fixUp(uint256 idx) internal {
-        while (
-            exists(parent(idx)) && idx > 0 && arr[(idx - 1) / 2] < arr[idx]
-        ) {
+        while (exists(parent(idx)) && checkBounds(idx)) {
             // swap
             uint256 tmp = arr[idx];
             arr[idx] = arr[(idx - 1) / 2];
