@@ -28,4 +28,15 @@ contract BSTTest is Test {
         assertTrue(bst.search(root, 10));
         assertTrue(bst.search(root, 9));
     }
+
+    function testDelete() public {
+        bytes32 root = 0;
+        root = bst.insert(root, 10);
+        root = bst.insert(root, 7);
+        root = bst.insert(root, 9);
+        root = bst.insert(root, 30);
+        assertTrue(bst.search(root, 10));
+        bst.remove(root, 7);
+        assertTrue(!bst.search(root, 7));
+    }
 }
