@@ -32,4 +32,10 @@ contract HeapTest is Test {
         assertEq(heap.arr(7), 10);
         assertEq(heap.arr(8), 23);
     }
+
+    function testFindMax() public {
+        heap.insert(50);
+        heap.insert(10);
+        assertEq(heap.findMax(), 50);
+    }
 }
