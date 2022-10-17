@@ -36,13 +36,13 @@ contract BST {
         return n;
     }
 
-    function search(bytes32 n, uint256 k) public view returns (uint256) {
+    function search(bytes32 n, uint256 k) public view returns (bool) {
         if (bst[n].key == 0) {
-            return 0;
+            return false;
         }
 
         if (k == bst[n].key) {
-            return bst[n].key;
+            return true;
         }
 
         if (k < bst[n].key) {

@@ -25,7 +25,7 @@ contract BSTTest is Test {
         root = bst.insert(root, 7);
         root = bst.insert(root, 9);
         root = bst.insert(root, 30);
-        assertEq(bst.search(root, 10), 10);
-        assertEq(bst.search(root, 9), 9);
+        assertTrue(bst.search(root, 10));
+        assertTrue(bst.search(root, 9));
     }
 }
