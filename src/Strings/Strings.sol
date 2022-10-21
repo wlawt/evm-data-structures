@@ -39,4 +39,13 @@ library Strings {
 
         return false;
     }
+
+    // KMP rolling hash patternMatching
+    function kmpPatternMatching(string memory t, string memory p)
+        public
+        pure
+        returns (bool)
+    {
+        //
+    }
 }
