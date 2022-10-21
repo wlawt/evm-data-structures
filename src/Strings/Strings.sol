@@ -16,15 +16,15 @@ library Strings {
         return string(result);
     }
 
-    function strcmp(
-        uint256 i,
-        string memory t,
-        string memory p
-    ) public pure returns (uint256) {
-        for (uint256 j = 0; j < bytes(p).length; j++) {
+    function strcmp(string memory t, string memory p)
+        public
+        pure
+        returns (uint256)
+    {
+        for (uint256 j = 0; j < bytes(p).length - 1; j++) {
             if (
-                keccak256(abi.encodePacked(bytes(t)[i + j])) !=
-                keccak256(abi.encodePacked(bytes(p)[j]))
+                keccak256(bytes(substring(t, j, j + 1))) !=
+                keccak256(bytes(substring(p, j, j + 1)))
             ) {
                 return 1;
             }
@@ -51,7 +51,7 @@ library Strings {
 
         for (uint256 i = 0; i < n - m; i++) {
             string memory tmp = substring(t, i, i + m - 1);
-            if (strcmp(i, tmp, p) == 0) {
+            if (strcmp(tmp, p) == 0) {
                 return true;
             }
         }

@@ -11,11 +11,12 @@ contract StringsTest is Test {
         string memory a = "cat";
         string memory b = "cat";
         assertTrue(Strings.simplestrcmp(a, b));
+        assertTrue(Strings.simplestrcmp("a", "a"));
     }
 
     function testPatternMatching() public {
-        string memory a = "cat";
-        string memory b = "cat";
+        string memory a = "abbbababbab";
+        string memory b = "abba";
         assertTrue(Strings.patternMatching(a, b));
     }
 }
