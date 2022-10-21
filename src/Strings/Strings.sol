@@ -80,4 +80,37 @@ library Strings {
 
         return false;
     }
+
+    // KMP rolling hash
+    function kmpRollingHash(string memory t, string memory p)
+        public
+        pure
+        returns (bool)
+    {
+        uint256 M = 15485863; // some large prime number
+        uint256 hP = uint256(keccak256(abi.encodePacked(bytes(p))));
+        uint256 hT = uint256(keccak256(abi.encodePacked(bytes(t))));
+
+        uint256 n = bytes(t).length;
+        uint256 m = bytes(p).length;
+        uint256 s = (10**(m - 1)) % M;
+
+        for (uint256 i = 0; i < n - m; i++) {
+            if (hT == hP) {
+                string memory substrT = substring(t, i, i + m);
+                if (strcmp(substrT, p) == 0) {
+                    return true;
+                }
+            }
+
+            if (i < n - m) {
+                // compute next hash value guess
+                uint256 T_i = hT % s;
+                uint256 T_im = hT % 10;
+                hT = ((hT - T_i * s) * 10 + T_im) % M;
+            }
+        }
+
+        return false;
+    }
 }

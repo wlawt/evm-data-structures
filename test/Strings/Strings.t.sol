@@ -25,4 +25,10 @@ contract StringsTest is Test {
         string memory b = "abba";
         assertTrue(Strings.kmpSimple(a, b));
     }
+
+    function testKMPRollingHash() public {
+        string memory a = "abbbababbab";
+        string memory b = "abba";
+        assertTrue(Strings.kmpRollingHash(a, b));
+    }
 }
