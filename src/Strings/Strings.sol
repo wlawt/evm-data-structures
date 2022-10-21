@@ -59,12 +59,25 @@ library Strings {
         return false;
     }
 
-    // KMP rolling hash patternMatching
-    function kmpPatternMatching(string memory t, string memory p)
+    // KMP simple hash patternMatching
+    function kmpSimple(string memory t, string memory p)
         public
         pure
         returns (bool)
     {
-        //
+        uint256 hP = uint256(keccak256(abi.encodePacked(bytes(p))));
+        uint256 n = bytes(t).length;
+        uint256 m = bytes(p).length;
+        for (uint256 i = 0; i < n - m; i++) {
+            string memory substrT = substring(t, i, i + m); // [i, i+m-1]
+            uint256 hT = uint256(keccak256(abi.encodePacked(bytes(substrT))));
+            if (hP == hT) {
+                if (strcmp(substrT, p) == 0) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

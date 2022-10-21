@@ -19,4 +19,10 @@ contract StringsTest is Test {
         string memory b = "abba";
         assertTrue(Strings.patternMatching(a, b));
     }
+
+    function testKMPSimple() public {
+        string memory a = "abbbababbab";
+        string memory b = "abba";
+        assertTrue(Strings.kmpSimple(a, b));
+    }
 }
