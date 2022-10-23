@@ -20,15 +20,15 @@ contract StringsTest is Test {
         assertTrue(Strings.patternMatching(a, b));
     }
 
-    function testKMPSimple() public {
+    function testKarpRabinSimple() public {
         string memory a = "abbbababbab";
         string memory b = "abba";
-        assertTrue(Strings.kmpSimple(a, b));
+        assertTrue(Strings.karpRabinSimple(a, b));
     }
 
-    function testKMPRollingHash() public {
+    function testKarpRabinRollingHash() public {
         string memory a = "abbbababbab";
         string memory b = "abba";
-        assertTrue(Strings.kmpRollingHash(a, b));
+        assertTrue(Strings.karpRabinRollingHash(a, b));
     }
 }

@@ -61,8 +61,8 @@ library Strings {
         return false;
     }
 
-    // KMP simple hash patternMatching
-    function kmpSimple(string memory t, string memory p)
+    // Karp-Rabin simple hash patternMatching
+    function karpRabinSimple(string memory t, string memory p)
         public
         pure
         returns (bool)
@@ -83,8 +83,8 @@ library Strings {
         return false;
     }
 
-    // KMP rolling hash
-    function kmpRollingHash(string memory t, string memory p)
+    // Karp-Rabin rolling hash
+    function karpRabinRollingHash(string memory t, string memory p)
         public
         pure
         returns (bool)
