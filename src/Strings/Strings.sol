@@ -147,4 +147,40 @@ library Strings {
 
         return failureArr;
     }
+
+    // kmp pattern mattching
+    function kmpPatternMatching(string memory t, string memory p)
+        public
+        returns (bool)
+    {
+        uint256[] memory F = kmpFailureArray(p);
+
+        uint256 i = 0;
+        uint256 j = 0;
+
+        uint256 n = bytes(t).length;
+        uint256 m = bytes(p).length;
+
+        while (i < n) {
+            string memory P_j = substring(p, j, j + 1);
+            string memory T_i = substring(t, i, i + 1);
+
+            if (simplestrcmp(P_j, T_i)) {
+                if (j == m - 1) {
+                    return true;
+                } else {
+                    i++;
+                    j++;
+                }
+            } else {
+                if (j > 0) {
+                    j = F[j - 1];
+                } else {
+                    i++;
+                }
+            }
+        }
+
+        return false;
+    }
 }
